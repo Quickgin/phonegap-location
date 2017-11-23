@@ -6,7 +6,8 @@ $(document).on('pageinit', function() {
 	
 	//change time box to show message
 	$('#time').val("Press the button to get location data");
-	
+	$('#lattext').val("Press the button to get location data");
+    $('#longtext').val("Press the button to get location data");
 });
 
 
@@ -15,6 +16,8 @@ function getPosition() {
 	
 	//change time box to show updated message
 	$('#time').val("Getting data...");
+    $('#lattext').val("Getting data...");
+    $('#longtext').val("Getting data...");
 	
 	//instruct location service to get position with appropriate callbacks
 	navigator.geolocation.getCurrentPosition(successPosition, failPosition);
@@ -30,17 +33,21 @@ function successPosition(position) {
 
 	//lets get some stuff out of the position object
 	var time = position.timestamp;
-	var latitude = position.coords.latitude;
+	var latitude = position.coords.latitude; 
+    var longitude = position.coords.longitude;
 	
+    
 	//OK. Now we want to update the display with the correct values
 	$('#time').val("Recieved data at " + time);
-	$('#lattext').val("I should contain the latitude data...");
-	
+	$('#lattext').val("Recieved data at "+latitude);
+	$('#longtext').val("Recieved data at "+longitude);
 }
 
 //called if the position is not obtained correctly
 function failPosition(error) {
 	//change time box to show updated message
 	$('#time').val("Error getting data: " + error);
+    $('#lattext').val("Error getting data: " + error);
+    $('#longtext').val("Error getting data: " + error);
 	
 }
